@@ -1,7 +1,9 @@
 FROM dolfinx/dolfinx:nightly
 
 RUN apt-get update 
-RUN apt-get install libspdlog-dev -y
+RUN apt-get install -y \
+    clangd \
+    libspdlog-dev
 
 # For now the projects ufl, basix and ffcx are treated as strict dependencies and are not part of the dev env in that sense
 #  -> that should be adapted in the future
