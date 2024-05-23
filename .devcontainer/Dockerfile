@@ -3,6 +3,7 @@ FROM dolfinx/dolfinx:nightly
 RUN apt-get update 
 RUN apt-get install -y \
     clangd \
+    cmake-curses-gui \
     libspdlog-dev
 
 # For now the projects ufl, basix and ffcx are treated as strict dependencies and are not part of the dev env in that sense
