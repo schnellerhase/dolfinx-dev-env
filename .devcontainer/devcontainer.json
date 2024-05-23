@@ -11,6 +11,7 @@
       "extensions": [
         // "streetsidesoftware.code-spell-checker",
         "llvm-vs-code-extensions.vscode-clangd",
+        "ms-python.python",
       ],
       "settings": {
         "clangd.path": "/usr/bin/clangd",
