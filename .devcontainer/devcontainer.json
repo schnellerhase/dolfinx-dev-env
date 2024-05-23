@@ -1,0 +1,21 @@
+{
+  "name": "dolfinx-dev-env",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [
+    3000
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // "streetsidesoftware.code-spell-checker",
+        "llvm-vs-code-extensions.vscode-clangd",
+      ],
+      "settings": {
+        "clangd.path": "/usr/bin/clangd",
+        "editor.tabSize": 2,
+      }
+    }
+  },
+}
