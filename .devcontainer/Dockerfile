@@ -33,3 +33,29 @@ RUN python3 -m pip install mpi4py nanobind scikit-build-core[pyproject] --upgrad
 RUN python3 -m pip install git+https://github.com/FEniCS/ufl.git
 RUN python3 -m pip install git+https://github.com/FEniCS/basix.git
 RUN python3 -m pip install git+https://github.com/FEniCS/ffcx.git
+
+# TODO: make this injectable to Dockerfile
+WORKDIR /
+RUN git clone https://github.com/schnellerhase/dolfinx.git
+
+# build cpp/
+RUN mkdir /dolfinx/cpp/build
+WORKDIR /dolfinx/cpp/build
+RUN cmake .. -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+RUN ninja install
+
+# install python/
+WORKDIR /dolfinx/python
+RUN python -m pip install .
+
+
+# ----- CONTENTS OF dolfinx.conf ----
+# Common Unix variables
+RUN export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+RUN export PATH=/usr/local/bin:$PATH
+RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+RUN export CMAKE_PREFIX_PATH=/usr/local/lib/cmake:$CMAKE_PREFIX_PATH
+
+# Special macOS variables
+RUN export DYLD_FRAMEWORK_PATH=/opt/local/Library/Frameworks:$DYLD_FRAMEWORK_PATH
+# -----------------------------------
